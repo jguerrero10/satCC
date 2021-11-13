@@ -60,7 +60,7 @@ def main_sat():
 
 if __name__ == "__main__":
     log_create('Programa Iniciado...........', 'info')
-    loaderTemp = jinja2.FileSystemLoader(searchpath="./template/")
+    loaderTemp = jinja2.FileSystemLoader(searchpath=config.TEMPLATE)
     envTemp = jinja2.Environment(loader=loaderTemp)
     template_file = 'template.html'
     template = envTemp.get_template(template_file)

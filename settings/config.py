@@ -15,7 +15,7 @@ PORT_TCP = env('PORT_TCP') # Puerto Estacion
 BAUDRATE_SERIAL = env.int('BAUDRATE_SERIAL')
 
 # Directorio de datos
-DIR_DATOS = PurePath('.', 'datos')
+DIR_DATOS = PurePath(env('ROUTE'), 'datos')
 
 # FTP
 FTP_CREDENTIALS = {
@@ -27,3 +27,6 @@ FTP_CREDENTIALS = {
 
 #Ruta de Logs
 LOGS = env('LOGS')
+
+# Ruta Template
+TEMPLATE = env('TEMPLATE')
