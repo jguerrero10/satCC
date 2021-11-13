@@ -1,0 +1,49 @@
+'Created on 05/Noviembre/2021
+'@author: Joel Guerrero - Canal Clima
+'
+' Programa para CR300, lee los datos pluviometricos
+'Datos son guardados cada minuto
+'envia OutString cada minuto por el puerto Serial ComRS232 
+
+'Declare Variables and Units
+Public BattV
+Public PTemp_C
+Public Rain_mm
+Public OutString as string * 100
+
+Units BattV=Volts
+Units PTemp_C=Deg C
+Units Rain_mm=mm
+
+'Define Data Tables
+DataTable(Datos,True,-1)
+	DataInterval(0,1,Min,10)
+	Totalize(1,Rain_mm,FP2,False)
+	FieldNames("010")
+	Sample(1,BattV,FP2)
+	FieldNames("083")
+	Sample(1,PTemp_C,FP2)
+EndTable
+
+'Main Program
+BeginProg
+	'Main Scan
+	SerialOpen (ComRS232,115200,0,0,100)	
+	Scan(10,Sec,1,0)
+		'Default CR300 Datalogger Battery Voltage measurement 'BattV'
+		Battery(BattV)
+		'Default CR300 Datalogger Processor Temperature measurement 'PTemp_C'
+		PanelTemp(PTemp_C,60)
+		'TE525MM/TE525M Rain Gauge measurement 'Rain_mm'
+		PulseCount(Rain_mm,1,P_SW,2,0,0.1,0)
+		'Call Data Tables and Store Data
+		CallTable Datos
+	NextScan
+	
+	SlowSequence	
+	Scan (1,Min,0,0)		
+		SerialFlush (ComRS232)
+		OutString = CHR(34)+Public.Timestamp(4,0)+CHR(34)+","+Rain_mm+","+PTemp_C+","+BattV		
+		SerialOut(ComRS232,OutString,"",0,100)	
+	NextScan
+EndProg

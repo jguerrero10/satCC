@@ -1,0 +1,11 @@
+[Unit]
+Description=Servicio Lectura TCP/IP CR300
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/hello_world.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
