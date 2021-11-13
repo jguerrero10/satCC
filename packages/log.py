@@ -10,12 +10,13 @@ Generacion de Logs
 
 import logging
 from datetime import datetime
+from settings import config
 
-logging.basicConfig(filename='./log/logs.log', encoding='utf-8', level=logging.INFO)
-logging.basicConfig(filename='./log/logs.log', encoding='utf-8', level=logging.DEBUG)
-logging.basicConfig(filename='./log/logs.log', encoding='utf-8', level=logging.WARNING)
-logging.basicConfig(filename='./log/logs.log', encoding='utf-8', level=logging.ERROR)
-logging.basicConfig(filename='./log/logs.log', encoding='utf-8', level=logging.CRITICAL)
+logging.basicConfig(filename=config.LOGS, encoding='utf-8', level=logging.INFO)
+logging.basicConfig(filename=config.LOGS, encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename=config.LOGS, encoding='utf-8', level=logging.WARNING)
+logging.basicConfig(filename=config.LOGS, encoding='utf-8', level=logging.ERROR)
+logging.basicConfig(filename=config.LOGS, encoding='utf-8', level=logging.CRITICAL)
 
 
 def log_create(e, tipo='error'):
