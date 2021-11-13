@@ -24,3 +24,6 @@ FTP_CREDENTIALS = {
         'PASS': env('PASS'),
         'DIR': env('DIR')
 }
+
+#Ruta de Logs
+LOGS = env('LOGS')
